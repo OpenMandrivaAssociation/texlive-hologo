@@ -1,6 +1,6 @@
 Name:		texlive-hologo
 Version:	61719
-Release:	1
+Release:	2
 Summary:	A collection of logos with bookmark support
 Group:		Publishing
 URL:		http://www.ctan.org/tex-archive/macros/latex/contrib/hologo
