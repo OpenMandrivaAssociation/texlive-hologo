@@ -1,41 +1,24 @@
-Name:		texlive-hologo
-Version:	61719
-Release:	2
+%global tl_name hologo
+%global tl_revision 79461
+
+Name:		texlive-%{tl_name}
+Epoch:		1
+Version:	1.17
+Release:	%{tl_revision}.1
 Summary:	A collection of logos with bookmark support
 Group:		Publishing
-URL:		https://www.ctan.org/tex-archive/macros/latex/contrib/hologo
+URL:		https://www.ctan.org/tex-archive/macros/generic/hologo
 License:	lppl1.3c
-Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/hologo.r%{version}.tar.xz
-Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/hologo.doc.r%{version}.tar.xz
-Source2:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/hologo.source.r%{version}.tar.xz
+Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/hologo.r%{tl_revision}.tar.xz
+Source1:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/hologo.doc.r%{tl_revision}.tar.xz
+Source2:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/hologo.source.r%{tl_revision}.tar.xz
 BuildArch:	noarch
-BuildRequires:	texlive-tlpkg
-Requires(pre):	texlive-tlpkg
-Requires(post):	texlive-kpathsea
+BuildSystem:	texlive
+Provides:	texlive(%{tl_name}) = %{tl_revision}
 
 %description
-The package defines a single command \hologo, whose argument is
-the usual case-confused ASCII version of the logo. The command
-is bookmark-enabled, so that every logo becomes available in
-bookmarks without further work.
+The package defines a single command \hologo, whose argument is the
+usual case-confused ASCII version of the logo. The command is bookmark-
+enabled, so that every logo becomes available in bookmarks without
+further work.
 
-%prep
-%setup -c -a1 -a2
-%autopatch -p1
-
-%build
-
-%install
-rm -rf tlpkg
-mkdir -p %{buildroot}%{_texmfdistdir}
-cp -a * %{buildroot}%{_texmfdistdir}
-
-%files
-%doc %{_texmfdistdir}/source/generic/hologo
-%{_texmfdistdir}/tex/generic/hologo
-%doc %{_texmfdistdir}/doc/generic/hologo
-
-%post -p %{_sbindir}/texlive.post
-
-%postun
-[ "$1" -eq 0 ] && %{_sbindir}/texlive.post
